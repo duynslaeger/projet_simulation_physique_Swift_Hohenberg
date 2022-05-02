@@ -1,8 +1,9 @@
-''' Import Module'''
+''' Importation des modules '''
 import numpy as np
 import matplotlib.pyplot as plt
 
 
+''' Fonctions utiles '''
 #################### LEAPFROG ####################
 def first_iter(un,Nt,N,dt,dx,delta):
     for i in range(0,N-2):
@@ -19,7 +20,8 @@ def compute(un,Nt,N,dt,dx,delta):
         un[j+1][N-1] = un[j-1][N-1] - (dt/(3*dx))*(un[j][0]+un[j][N-1]+un[j][N-2])*(un[j][0]-un[j][N-2]) - ((dt*delta**2)/(dx**3))*(un[j][1]-2*un[j][0]+2*un[j][N-2]-un[j][N-3])
     return un
 
-##### Condition initiale: cosinus #####
+''' Condition initiale: cosinus '''
+#################### LEAPFROG ####################
 """
 dx = 0.01
 N = int(2/dx)
@@ -40,14 +42,18 @@ un = compute(un,Nt,N,dt,dx,delta)
 time = 0
 plt.plot(x,un[time],label='t = 0')
 
-time = int(Nt/(2*np.pi))
+time = int(1/(dt*np.pi))
 plt.plot(x,un[time],label='t = 1/$\pi$')
 
-time = int(Nt*3.6/(2*np.pi))
+time = int(3.6/(dt*np.pi))
 plt.plot(x,un[time],label='t = 3.6/$\pi$')
-plt.legend()
-plt.show()
 
+plt.legend()
+plt.xlabel("$x$")
+plt.ylabel("$u(x,t)$")
+plt.show()
+"""
+"""
 for n in range(0,Nt,int(Nt/10)):
     if n==0: fig, ax = plt.subplots(figsize=(5.5,4))
     plt.clf()
@@ -63,7 +69,8 @@ for n in range(0,Nt,int(Nt/10)):
 plt.show()
 """
 
-##### Condition initiale: sech^2 (1 soliton) #####
+''' Condition initiale: sech^2 (1 soliton) '''
+#################### LEAPFROG ####################
 """
 ''' Amplitude = 1 '''
 dx = 0.1739
@@ -98,9 +105,12 @@ plt.plot(x,un[time],label='t = 0.5')
 
 time = int(Nt/(1)-1)
 plt.plot(x,un[time],label='t = 1')
+
 plt.legend()
-"""
-"""
+plt.xlabel("$x$")
+plt.ylabel("$u(x,t)$")
+
+
 ''' Amplitude = 2 '''
 dx = 0.08
 N = int(40/dx)
@@ -136,6 +146,9 @@ time = int(Nt/(1)-1)
 plt.plot(x,un[time],label='t = 1')
 
 plt.legend()
+plt.xlabel("$x$")
+plt.ylabel("$u(x,t)$")
+
 
 ''' Amplitude = 4 '''
 dx = 0.05
@@ -172,10 +185,12 @@ time = int(Nt/(1)-1)
 plt.plot(x,un[time],label='t = 1')
 
 plt.legend()
-"""
-"""
-plt.show()
+plt.xlabel("$x$")
+plt.ylabel("$u(x,t)$")
 
+plt.show()
+"""
+"""
 for n in range(0,Nt,int(Nt/10)):
     if n==0: fig, ax = plt.subplots(figsize=(5.5,4))
     plt.clf()
@@ -199,8 +214,8 @@ plt.show()
 """
 
 
-##### Condition initiale: sech^2 (2 solitons) #####
-"""
+''' Condition initiale: sech^2 (2 solitons) '''
+#################### LEAPFROG ####################
 dx = 0.12
 N = int(40/dx)+1
 x = np.arange(-20,20,dx)
@@ -209,10 +224,10 @@ Nt = int(20/dt)+1
 t = np.arange(0,20,dt)
 delta = 0.4
 
-A1 = 1
+A1 = 4
 k1 = (A1/2)**0.5
 w1 = 4*k1**3
-A2 = 0.5
+A2 = 1
 k2 = (A2/2)**0.5
 w2 = 4*k2**3
 
@@ -225,6 +240,24 @@ un[1] = un0
 
 un = first_iter(un,Nt,N,dt,dx,delta)
 un = compute(un,Nt,N,dt,dx,delta)
+
+time = 0
+plt.plot(x,un[time],label='t = 0')
+
+time = int(Nt*0.25/(1))
+plt.plot(x,un[time],label='t = 0.25')
+
+time = int(Nt*0.5/(1))
+plt.plot(x,un[time],label='t = 0.5')
+
+time = int(Nt/(1)-1)
+plt.plot(x,un[time],label='t = 1')
+
+plt.legend()
+plt.xlabel("$x$")
+plt.ylabel("$u(x,t)$")
+
+plt.show()
 
 for n in range(0,Nt,int(Nt/20)):
     if n==0: fig, ax = plt.subplots(figsize=(5.5,4))
@@ -246,4 +279,3 @@ plt.colorbar()
 plt.xlabel('x')
 plt.ylabel('t')
 plt.show()
-"""
