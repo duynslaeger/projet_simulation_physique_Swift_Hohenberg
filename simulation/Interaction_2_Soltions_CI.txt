@@ -1,0 +1,6 @@
+Dx = 0.12
+Dt = 0.00066
+
+Condition initiale : un0 = A1 / (np.cosh(k1 * x + 3 * mu0)**2) + A2 / (np.cosh(k2 * (x - mu0))**2)
+
+Avec mu_0 = 5, A1 = 4, A2 = 1
